@@ -37,8 +37,8 @@ public class RedditPhotoImpact {
 						+ tempStr[4] + ", " 
 						+ tempStr[5] + ", " 
 						+ tempStr[6]);
-			Integer sum = Integer.parseInt(tempStr[4]) + Integer.parseInt(tempStr[5]) + Integer.parseInt(tempStr[6]);
-			return new Tuple2<>(Integer.parseInt(tempStr[0]), sum);
+			Integer sum = Integer.valueOf(tempStr[4]) + Integer.valueOf(tempStr[5]) + Integer.valueOf(tempStr[6]);
+			return new Tuple2<>(Integer.valueOf(tempStr[0]), sum);
 		});
 
 		JavaPairRDD<Integer, Integer> counts = parseCount.reduceByKey((i, j) -> i + j);
