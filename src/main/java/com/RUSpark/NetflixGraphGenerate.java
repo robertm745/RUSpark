@@ -42,7 +42,8 @@ public class NetflixGraphGenerate {
 		ArrayList<Tuple2<Tuple2<Integer, Integer>, Integer>> output = new ArrayList<>(counts.collect());
 		
 		output.sort(Comparator.comparing(t -> t._1()._1()));
-		
+		output.sort(Comparator.comparing(t -> t._1()._2()));
+				
 		for (Tuple2<Tuple2<Integer, Integer>, Integer> t : output) {
 			System.out.println(t._1()._1() + " " + t._1()._2() + " " + t._2());
 		}
