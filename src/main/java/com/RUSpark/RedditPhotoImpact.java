@@ -32,11 +32,6 @@ public class RedditPhotoImpact {
 
 		JavaPairRDD<Integer, Integer> parseCount = lines.mapToPair(s -> {  
 			String[] tempStr = s.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);	
-			System.out.println("STR: " 
-						+ tempStr[0] + ", with vals: " 
-						+ tempStr[4] + ", " 
-						+ tempStr[5] + ", " 
-						+ tempStr[6]);
 			Integer sum = Integer.valueOf(tempStr[4]) + Integer.valueOf(tempStr[5]) + Integer.valueOf(tempStr[6]);
 			return new Tuple2<>(Integer.valueOf(tempStr[0]), sum);
 		});
@@ -45,7 +40,7 @@ public class RedditPhotoImpact {
 
 		ArrayList<Tuple2<Integer, Integer>> output = new ArrayList<Tuple2<Integer, Integer>>(counts.collect());
 
-		output.sort(Comparator.comparing(t -> t._1()));
+		output.sort(Comparator.comparing((Tuple2<Integer, Integer> t) -> t._2()).thenComparing(t -> t._1()));
 
 		for (Tuple2<?,?> tuple : output) {
 			System.out.println(tuple._1() + " " + tuple._2());

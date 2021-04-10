@@ -24,7 +24,7 @@ public class NetflixGraphGenerate {
 		String InputPath = args[0];
 		
 		/* Implement Here */ 
-		SparkSession spark = SparkSession.builder().appName("NetflixMovieAverage").getOrCreate();
+		SparkSession spark = SparkSession.builder().appName("NetflixGraphGenerate").getOrCreate();
 		
 		JavaRDD<String> lines = spark.read().textFile(InputPath).javaRDD();
 		
