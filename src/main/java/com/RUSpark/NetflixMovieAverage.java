@@ -38,7 +38,7 @@ public class NetflixMovieAverage {
 
 		ArrayList<Tuple2<Integer, Double>> output = new ArrayList<Tuple2<Integer, Double>>(avgs.collect());
 
-		output.sort(Comparator.comparing((Tuple2<Integer, Double> t) -> t._2()).reversed().thenComparing(t -> t._1()));
+		output.sort(Comparator.comparing((Tuple2<Integer, Double> t) -> t._1()));
 
 		for (Tuple2<?,?> tuple : output) {
 			System.out.println(tuple._1() + " " + String.format("%.2f", tuple._2()));
