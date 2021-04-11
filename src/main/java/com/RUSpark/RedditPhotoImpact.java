@@ -1,14 +1,11 @@
 package com.RUSpark;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
-import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
-import java.util.Comparator;
 
 import scala.Tuple2;
 
@@ -37,10 +34,10 @@ public class RedditPhotoImpact {
 		});
 
 		JavaPairRDD<Integer, Integer> counts = parseCount.reduceByKey((i, j) -> i + j);
-
+		
 		ArrayList<Tuple2<Integer, Integer>> output = new ArrayList<Tuple2<Integer, Integer>>(counts.collect());
 
-		output.sort(Comparator.comparing((Tuple2<Integer, Integer> t) -> t._2()).thenComparing(t -> t._1()));
+		output.sort(Comparator.comparing((Tuple2<Integer, Integer> t) -> t._2()).reversed().thenComparing(t -> t._1()));
 
 		for (Tuple2<?,?> tuple : output) {
 			System.out.println(tuple._1() + " " + tuple._2());

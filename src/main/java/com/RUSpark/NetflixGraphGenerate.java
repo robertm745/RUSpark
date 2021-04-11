@@ -1,7 +1,6 @@
 package com.RUSpark;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 import org.apache.spark.api.java.JavaPairRDD;
@@ -57,8 +56,8 @@ public class NetflixGraphGenerate {
 				pairs2
 				.mapToPair(p -> new Tuple2<>(
 												new Tuple2<>(
-														p._1()._2(),
-														p._2()._2()
+														p._1()._2(),	// custID_1
+														p._2()._2() 	// custID_2
 												),
 												1
 											)
@@ -70,7 +69,7 @@ public class NetflixGraphGenerate {
 		// collect
 		ArrayList<Tuple2<Tuple2<Integer, Integer>, Integer>> output = new ArrayList<>(counts.collect());
 		
-		// customized sort
+		// sort
 		output.sort(
 					Comparator.comparing((Tuple2<Tuple2<Integer, Integer>, Integer> t) -> t._2()) // sort first by weight of connection
 					.reversed() // descending order
@@ -79,7 +78,7 @@ public class NetflixGraphGenerate {
 			);
 		
 		for (Tuple2<Tuple2<Integer, Integer>, Integer> t : output) {
-			System.out.println(t._1()._1() + " " + t._1()._2() + " " + t._2());
+			System.out.println("(" + t._1()._1() + ", " + t._1()._2() + ") " + t._2());
 		}
 		
 	}
